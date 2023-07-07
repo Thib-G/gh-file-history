@@ -7,23 +7,24 @@ st.write("""
     # Extract commit history
 """)
          
-file_url = st.text_input('Enter link to file on GitHub', value='https://github.com/Thib-G/pasevident.be/blob/main/src/assets/sentences/index.js')
+file_url = st.text_input('Enter link to repo on GitHub', value='https://github.com/virginiemarelli/AI-ethic-oath')
 
-pattern = r'^https:\/\/github.com\/(.+)\/(.+)\/blob\/(main|master)\/(.+)$'
+pattern = r'^https:\/\/github.com\/(.+)\/(.+)'
 p = re.compile(pattern)
 matches = p.findall(file_url)
-owner, repo, branch, path = matches[0]
+owner, repo = matches[0]
+
+branch = 'main'
 
 
 st.write(f"""
  - owner: {owner}
  - repo: {repo}
  - branch: {branch}
- - path: {path}
 """)
 
 
-url = f'https://api.github.com/repos/{owner}/{repo}/commits?sha={branch}&path=/{path}'
+url = f'https://api.github.com/repos/{owner}/{repo}/commits?sha=main'
 
 st.write(f'URL: `{url}`')
 
@@ -34,7 +35,8 @@ r = requests.get(url)
 commits_flat = [
     {
         'message': row.get('commit').get('message'),
-        'author': row.get('commit').get('author').get('name'),
+        'github author': row.get('author').get('login', '?') if row.get('author') else '?',
+        'commit author': row.get('commit').get('author').get('name'),
         'date': row.get('commit').get('author').get('date'),
         'html_url': row.get('html_url'),
     }
