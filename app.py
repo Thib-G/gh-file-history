@@ -41,6 +41,7 @@ url = f'https://api.github.com/repos/{owner}/{repo}/commits?sha=main'
 
 st.write("""
 ## They have pledged:
+(filtered on commits where the message is `I pledge`)
 """)
 st.write(f'URL: `{url}`')
 
