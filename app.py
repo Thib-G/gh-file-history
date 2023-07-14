@@ -64,7 +64,7 @@ commits_flat = [
 df = pd.DataFrame(commits_flat)
 
 st.dataframe(
-    df[df['Message'] == 'I pledge'],
+    df[df['Message'] == 'I pledge'].reset_index(),
     column_config={
         'Link': st.column_config.LinkColumn()
     }
