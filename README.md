@@ -10,4 +10,4 @@ streamlit run app.py
 
 ##
 
-Demo: https://gh-file-history.streamlit.app/
+Demo: https://ai-pocratic-oath.streamlit.app/
